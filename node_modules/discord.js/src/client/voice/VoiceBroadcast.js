@@ -18,7 +18,6 @@ const { Events } = require('../../util/Constants');
  * }
  * ```
  * @implements {PlayInterface}
- * @extends {EventEmitter}
  */
 class VoiceBroadcast extends EventEmitter {
   constructor(client) {

@@ -2,7 +2,7 @@ const ytdl = require("ytdl-core");
 
 module.exports = {
   name: "play",
-  description: "Play a song in your channel!",
+  description: "Phát một bài hát trong kênh của bạn!",
   async execute(message) {
     try {
       const args = message.content.split(" ");
@@ -12,12 +12,12 @@ module.exports = {
       const voiceChannel = message.member.voice.channel;
       if (!voiceChannel)
         return message.channel.send(
-          "You need to be in a voice channel to play music!"
+          "Bạn cần ở trong một kênh thoại để phát nhạc!"
         );
       const permissions = voiceChannel.permissionsFor(message.client.user);
       if (!permissions.has("CONNECT") || !permissions.has("SPEAK")) {
         return message.channel.send(
-          "I need the permissions to join and speak in your voice channel!"
+          "Tôi cần quyền để tham gia và nói trong kênh thoại của bạn!"
         );
       }
 
@@ -53,7 +53,7 @@ module.exports = {
       } else {
         serverQueue.songs.push(song);
         return message.channel.send(
-          `${song.title} has been added to the queue!`
+          `${song.title} đã được thêm vào hàng đợi!`
         );
       }
     } catch (error) {
@@ -81,6 +81,6 @@ module.exports = {
       })
       .on("error", error => console.error(error));
     dispatcher.setVolumeLogarithmic(serverQueue.volume / 5);
-    serverQueue.textChannel.send(`Start playing: **${song.title}**`);
+    serverQueue.textChannel.send(`Đang phát: **${song.title}**`);
   }
 };

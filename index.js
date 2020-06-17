@@ -1,11 +1,13 @@
 const fs = require('fs')
 const Discord = require('discord.js');
+const YouTube = require("discord-youtube-api");
 const Client = require('./client/Client');
 const {
 	prefix,
 	token,
 } = require('./config.json');
 
+const youtube = new YouTube("google api key");
 const client = new Client();
 client.commands = new Discord.Collection();
 
