@@ -1,8 +1,8 @@
 const fs = require('fs')
 
 module.exports = {
-	name: 'giupdo',
-	description: 'Danh sách câu lệnh có sẵn.',
+	name: 'help',
+	description: 'List all available commands.',
 	execute(message) {
 		let str = '';
 		const commandFiles = fs.readdirSync('./commands').filter(file => file.endsWith('.js'));
