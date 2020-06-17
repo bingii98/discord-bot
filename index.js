@@ -18,11 +18,9 @@ for (const file of commandFiles) {
 	client.commands.set(command.name, command);
 }
 
-console.log(client.commands);
-
 client.once('ready', () => {
 	console.log('Ready!');
-	isOnline = true;
+	client.user.setStatus("Listening to !gáy-đi");
 });
 
 client.once('reconnecting', () => {
@@ -50,14 +48,6 @@ client.on('message', async message => {
 	} catch (error) {
 		console.error(error);
 		message.reply('There was an error trying to execute that command!');
-	}
-
-	try {
-		if (commandName == "p") {
-			message.channel.send(`**${message.author.username}** " đã orther một món ăn tinh thần!"`)
-		}
-	} catch (error) {
-		console.error(error);
 	}
 
 	//AUTO COMMENT

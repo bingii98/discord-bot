@@ -1,4 +1,5 @@
 const ytdl = require("ytdl-core");
+const Discord = require('discord.js');
 
 module.exports = {
   name: "p",
@@ -81,6 +82,10 @@ module.exports = {
       })
       .on("error", error => console.error(error));
     dispatcher.setVolumeLogarithmic(serverQueue.volume / 5);
-    serverQueue.textChannel.send(`> :small_orange_diamond: Đang phát: **${song.title}**`);
+    const exampleEmbed = new Discord.MessageEmbed()
+      .setColor('#a6dcef')
+      .setTitle("Đang phát")
+      .setDescription(`[**${song.title}**](${song.url}) bởi **${message.author.username}**`)
+    message.channel.send(exampleEmbed);
   }
 };
