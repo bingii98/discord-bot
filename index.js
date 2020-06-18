@@ -19,8 +19,9 @@ for (const file of commandFiles) {
 }
 
 client.once('ready', () => {
-	console.log('Ready!');
-	client.user.setStatus("Listening to !gáy-đi");
+    client.user.setPresence({ activity: { name: '.help', type : "LISTENING" }, status: 'online' })
+  .then(console.log("Server running ..."))
+  .catch(console.error);
 });
 
 client.once('reconnecting', () => {
@@ -60,6 +61,4 @@ client.on('message', async message => {
 });
 
 
-client.login(token).then(() => {
-	client.user.setS
-});
+client.login(token);
