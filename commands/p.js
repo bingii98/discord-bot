@@ -26,7 +26,6 @@ module.exports = {
       var regex = new RegExp(expression);
       var url = message.content.slice(3);
       //Replace utf-8
-      url = url.toLowerCase();
       url = url.replace(/à|á|ạ|ả|ã|â|ầ|ấ|ậ|ẩ|ẫ|ă|ằ|ắ|ặ|ẳ|ẵ/g, "a");
       url = url.replace(/è|é|ẹ|ẻ|ẽ|ê|ề|ế|ệ|ể|ễ/g, "e");
       url = url.replace(/ì|í|ị|ỉ|ĩ/g, "i");
@@ -40,6 +39,8 @@ module.exports = {
         const video = await youtube.searchVideos(url);
         url = "https://www.youtube.com/watch?v=" + video.id;
       }
+
+      console.log(url);
 
       //SONG INFO
       const songInfo = await ytdl.getInfo(url);

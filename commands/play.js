@@ -26,7 +26,6 @@ module.exports = {
       var regex = new RegExp(expression);
       var url = message.content.slice(3);
       //Replace utf-8
-      url = url.toLowerCase();
       url = url.replace(/à|á|ạ|ả|ã|â|ầ|ấ|ậ|ẩ|ẫ|ă|ằ|ắ|ặ|ẳ|ẵ/g, "a");
       url = url.replace(/è|é|ẹ|ẻ|ẽ|ê|ề|ế|ệ|ể|ễ/g, "e");
       url = url.replace(/ì|í|ị|ỉ|ĩ/g, "i");
@@ -40,6 +39,8 @@ module.exports = {
         const video = await youtube.searchVideos(url);
         url = "https://www.youtube.com/watch?v=" + video.id;
       }
+
+      console.log(url);
 
       //SONG INFO
       const songInfo = await ytdl.getInfo(url);
@@ -76,7 +77,7 @@ module.exports = {
         serverQueue.songs.push(song);
         const exampleEmbed = new Discord.MessageEmbed()
           .setColor('#000000')
-          .setDescription(`Đã thêm :label: [**${song.title}**](${song.url}) vào hàng đợi \n:small_orange_diamond: ${message.author.username}`)
+          .setDescription(`Đã thêm :label: [**${song.title}**](${song.url}) vào hàng đợi \n:small_orange_diamond:bởi ${message.author.toString()}`)
         message.channel.send(exampleEmbed);
         return message.delete();
       }
@@ -106,7 +107,7 @@ module.exports = {
     const exampleEmbed = new Discord.MessageEmbed()
       .setColor('#f0a500')
       .setTitle("Đang phát")
-      .setDescription(`[**${song.title}**](${song.url}) \n:small_orange_diamond: ${message.author.username}`)
+      .setDescription(`[**${song.title}**](${song.url}) \n:small_orange_diamond:bởi ${message.author.toString()}`)
     message.channel.send(exampleEmbed);
     return message.delete();
   }
