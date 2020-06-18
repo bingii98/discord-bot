@@ -1,3 +1,5 @@
+const Discord = require('discord.js');
+
 module.exports = {
 	name: 'nowplaying',
 	description: 'Get the song that is playing.',

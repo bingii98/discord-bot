@@ -2,7 +2,7 @@ const ytdl = require("ytdl-core");
 const Discord = require('discord.js');
 
 module.exports = {
-  name: "p",
+  name: "play",
   description: "Phát một bài hát trong kênh của bạn!",
   async execute(message) {
     try {
@@ -76,7 +76,7 @@ module.exports = {
         serverQueue.songs.push(song);
         const exampleEmbed = new Discord.MessageEmbed()
           .setColor('#000000')
-          .setDescription(`Đã thêm :label: [**${song.title}**](${song.url}) vào hàng đợi \n:small_orange_diamond:bởi ${message.author.toString()}`)
+          .setDescription(`Đã thêm :label: [**${song.title}**](${song.url}) vào hàng đợi \n:small_orange_diamond: ${message.author.username}`)
         message.channel.send(exampleEmbed);
         return message.delete();
       }
@@ -106,7 +106,7 @@ module.exports = {
     const exampleEmbed = new Discord.MessageEmbed()
       .setColor('#f0a500')
       .setTitle("Đang phát")
-      .setDescription(`[**${song.title}**](${song.url}) \n:small_orange_diamond:bởi ${message.author.toString()}`)
+      .setDescription(`[**${song.title}**](${song.url}) \n:small_orange_diamond: ${message.author.username}`)
     message.channel.send(exampleEmbed);
     return message.delete();
   }

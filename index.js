@@ -46,12 +46,11 @@ client.on('message', async message => {
 			command.execute(message);
 		}
 	} catch (error) {
-		console.error(error);
-		message.reply('There was an error trying to execute that command!');
+		message.reply('There was an error trying to execute that command 1!');
 	}
 
 	//AUTO COMMENT
-	if (message.content == 'Ok') {
+	if (message.content.s == 'Ok') {
 		const embed = new MessageEmbed()
 			.setTitle('? ? :D ? ?')
 			.setColor(0xff0000)
