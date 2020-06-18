@@ -1,7 +1,7 @@
 const fs = require('fs')
 
 module.exports = {
-	name: 'gáy-đi',
+	name: 'help',
 	description: 'List all available commands.',
 	execute(message) {
 		let str = '';

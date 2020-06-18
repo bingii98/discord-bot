@@ -6,7 +6,6 @@ module.exports = {
   description: "Phát một bài hát trong kênh của bạn!",
   async execute(message) {
     try {
-      const args = message.content.split(" ");
       const queue = message.client.queue;
       const serverQueue = message.client.queue.get(message.guild.id);
 
@@ -22,7 +21,29 @@ module.exports = {
         );
       }
 
-      const songInfo = await ytdl.getInfo(args[1]);
+      //HANDLE URL
+      var expression = /^(http:\/\/www\.|https:\/\/www\.|http:\/\/|https:\/\/)?[a-z0-9]+([\-\.]{1}[a-z0-9]+)*\.[a-z]{2,5}(:[0-9]{1,5})?(\/.*)?$/gi;
+      var regex = new RegExp(expression);
+      var url = message.content.slice(3);
+      //Replace utf-8
+      url = url.toLowerCase();
+      url = url.replace(/à|á|ạ|ả|ã|â|ầ|ấ|ậ|ẩ|ẫ|ă|ằ|ắ|ặ|ẳ|ẵ/g, "a");
+      url = url.replace(/è|é|ẹ|ẻ|ẽ|ê|ề|ế|ệ|ể|ễ/g, "e");
+      url = url.replace(/ì|í|ị|ỉ|ĩ/g, "i");
+      url = url.replace(/ò|ó|ọ|ỏ|õ|ô|ồ|ố|ộ|ổ|ỗ|ơ|ờ|ớ|ợ|ở|ỡ/g, "o");
+      url = url.replace(/ù|ú|ụ|ủ|ũ|ư|ừ|ứ|ự|ử|ữ/g, "u");
+      url = url.replace(/ỳ|ý|ỵ|ỷ|ỹ/g, "y");
+      url = url.replace(/đ/g, "d");
+      if (!url.match(regex)) {
+        const YouTube = require("discord-youtube-api");
+        const youtube = new YouTube("AIzaSyAoFPMOBzK6BFCJAdRabzucVpQhCi1DKFY");
+        const video = await youtube.searchVideos(url);
+        url = "https://www.youtube.com/watch?v=" + video.id;
+      }
+
+      //SONG INFO
+      const songInfo = await ytdl.getInfo(url);
+
       const song = {
         title: songInfo.title,
         url: songInfo.video_url
@@ -53,9 +74,11 @@ module.exports = {
         }
       } else {
         serverQueue.songs.push(song);
-        return message.channel.send(
-          `${song.title} đã được thêm vào hàng đợi!`
-        );
+        const exampleEmbed = new Discord.MessageEmbed()
+          .setColor('#000000')
+          .setDescription(`Đã thêm :label: [**${song.title}**](${song.url}) vào hàng đợi \n:small_orange_diamond: ${message.author.username}`)
+        message.channel.send(exampleEmbed);
+        return message.delete();
       }
     } catch (error) {
       console.log(error);
@@ -83,9 +106,10 @@ module.exports = {
       .on("error", error => console.error(error));
     dispatcher.setVolumeLogarithmic(serverQueue.volume / 5);
     const exampleEmbed = new Discord.MessageEmbed()
-      .setColor('#a6dcef')
+      .setColor('#f0a500')
       .setTitle("Đang phát")
-      .setDescription(`[**${song.title}**](${song.url}) bởi **${message.author.username}**`)
+      .setDescription(`[**${song.title}**](${song.url}) \n:small_orange_diamond: ${message.author.username}`)
     message.channel.send(exampleEmbed);
+    return message.delete();
   }
 };
