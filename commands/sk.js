@@ -1,7 +1,7 @@
 const Discord = require('discord.js');
 
 module.exports = {
-	name: 'skip',
+	name: 'sk',
 	description: 'Bỏ qua bài hát hiện tại!',
 	execute(message) {
 		const serverQueue = message.client.queue.get(message.guild.id);

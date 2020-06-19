@@ -11,17 +11,23 @@ client.commands = new Discord.Collection();
 
 const commandFiles = fs.readdirSync('./commands').filter(file => file.endsWith('.js'));
 
-var isOnline = false;
-
 for (const file of commandFiles) {
 	const command = require(`./commands/${file}`);
 	client.commands.set(command.name, command);
 }
 
 client.once('ready', () => {
-    client.user.setPresence({ activity: { name: '.help', type : "LISTENING" }, status: 'online' })
-  .then(console.log("Server running ..."))
-  .catch(console.error);
+	client.user.setPresence(
+		{
+			activity:
+			{
+				name: '.help',
+				type: "LISTENING"
+			}, 
+			status: 'online'
+		})
+		.then(console.log("Server running ..."))
+		.catch(console.error);
 });
 
 client.once('reconnecting', () => {
@@ -43,20 +49,13 @@ client.on('message', async message => {
 	try {
 		if (commandName == "ban" || commandName == "userinfo") {
 			command.execute(message, client);
+		} else if (commandName == "help" || commandName == "h") {
+			command.execute(message, client);
 		} else {
 			command.execute(message);
 		}
 	} catch (error) {
-		message.reply('There was an error trying to execute that command 1!');
-	}
-
-	//AUTO COMMENT
-	if (message.content.s == 'Ok') {
-		const embed = new MessageEmbed()
-			.setTitle('? ? :D ? ?')
-			.setColor(0xff0000)
-			.setDescription('Oke cl gì vậy bạn!');
-		message.channel.send(embed);
+		message.reply(`\`Bạn đang thực hiện lệnh không được hỗ trợ!\``);
 	}
 });
 

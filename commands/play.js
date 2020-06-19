@@ -76,8 +76,8 @@ module.exports = {
       } else {
         serverQueue.songs.push(song);
         const exampleEmbed = new Discord.MessageEmbed()
-          .setColor('#000000')
-          .setDescription(`Đã thêm :label: [**${song.title}**](${song.url}) vào hàng đợi \n:small_orange_diamond:bởi ${message.author.toString()}`)
+          .setColor('#222831')
+          .setDescription(`Đã thêm :label: [${song.title}](${song.url}) vào hàng đợi \n \`Theo yêu cầu của \`[${message.author.toString()}]`)
         message.channel.send(exampleEmbed);
         return message.delete();
       }
@@ -104,10 +104,10 @@ module.exports = {
         this.play(message, serverQueue.songs[0]);
       })
     dispatcher.setVolumeLogarithmic(serverQueue.volume / 5);
+
     const exampleEmbed = new Discord.MessageEmbed()
-      .setColor('#f0a500')
-      .setTitle("Đang phát")
-      .setDescription(`[**${song.title}**](${song.url}) \n:small_orange_diamond:bởi ${message.author.toString()}`)
+      .setColor('#00adb5')
+      .addField(`**Đang phát**`,`[${song.title}](${song.url})\n\`Theo yêu cầu của \`[${message.author.toString()}]`)
     message.channel.send(exampleEmbed);
     return message.delete();
   }

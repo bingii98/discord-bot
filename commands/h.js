@@ -2,7 +2,7 @@ const fs = require('fs');
 const Discord = require('discord.js');
 
 module.exports = {
-	name: 'help',
+	name: 'h',
 	description: 'List all available commands.',
 	execute(message, client) {
 		try {
