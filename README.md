@@ -1,5 +1,7 @@
 # Discord-bot
 
+<img src="https://storage.googleapis.com/pr-newsroom-wp/1/2020/04/Gaming-Animation-for-Blog-1.gif">
+
 A simple discord bot which helps you manage your server by providing useful commands like playing music or deleting text messages.
 
 ## Features
